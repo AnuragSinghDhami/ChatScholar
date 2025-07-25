@@ -59,11 +59,11 @@ Receive instant, unbiased, and detailed feedback on your writing. This tool is p
 
 ## 💻 Technology Stack
 
--   **Frontend**: React.js, Next.js, Tailwind CSS
+-   **Frontend**: HTML, Tailwind CSS
 -   **Backend**: Python (Flask / FastAPI)
 -   **AI Model**: Google Gemini Pro
 -   **PDF Processing**: LangChain, PyPDF2
--   **Vector Database**: ChromaDB / FAISS
+-   **Vector Database**:  FAISS
 
 ## 🛠️ How to Use
 
