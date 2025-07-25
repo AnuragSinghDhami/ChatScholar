@@ -6,3 +6,5 @@ PyPDF2
 flask
 python-dotenv
 faiss-cpu
+bleach
+markdown
