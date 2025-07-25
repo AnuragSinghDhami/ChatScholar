@@ -4,7 +4,7 @@ ChatScholar is a comprehensive web application designed to assist students, educ
 
 ## 🚀 Overview
 
-This project aims to streamline the process of information retrieval from dense documents and provide objective, criteria-based feedback on written work. Whether you're a student studying from a textbook, a researcher analyzing papers, or a writer looking for feedback, IntelliStudy provides the tools you need to work smarter.
+This project aims to streamline the process of information retrieval from dense documents and provide objective, criteria-based feedback on written work. Whether you're a student studying from a textbook, a researcher analyzing papers, or a writer looking for feedback, ChatScholar provides the tools you need to work smarter.
 
 ## 📸 Screenshots
 
