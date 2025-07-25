@@ -8,7 +8,7 @@ This project aims to streamline the process of information retrieval from dense 
 
 ## 📸 Screenshots
 
-Here is a visual walkthrough of the IntelliStudy application.
+Here is a visual walkthrough of the ChatScholar application.
 
 **1. Landing Page**
 *The main entry point where users can choose between "Q&A with PDF" and "Essay Grading".*
