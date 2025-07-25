@@ -61,7 +61,7 @@ Receive instant, unbiased, and detailed feedback on your writing. This tool is p
 
 -   **Frontend**: HTML, Tailwind CSS
 -   **Backend**: Python (Flask )
--   **AI Model**: Google Gemini 1.5 flash
+-   **AI Model**: Google Gemini 2.5 flash
 -   **PDF Processing**: LangChain, PyPDF2
 -   **Vector Database**:  FAISS
 
