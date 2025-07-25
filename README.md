@@ -23,7 +23,7 @@ Here is a visual walkthrough of the ChatScholar application.
 ![Screenshot of the Q&A chat window. The user has asked a question, and the AI has responded with a relevant answer extracted from the uploaded PDF.](https://github.com/AnuragSinghDhami/ChatScholar/blob/main/static/phot3.png)
 
 **4. Defining the Essay Grading Rubric**
-*The setup screen for the Essay Grading tool, where the user defines the criteria and their respective weights (e.g., Grammar: 40%, Vocabulary: 30%, Structure: 30%).*
+*The setup screen for the Essay Grading tool, where the user defines the criteria and their respective weights (e.g., Grammar: 30%, Vocabulary: 30%, Structure: 40%).*
 ![Screenshot showing the interface for setting up the essay grading rubric. There are sliders or input fields for Grammar, Vocabulary, and other criteria.](https://github.com/AnuragSinghDhami/ChatScholar/blob/main/static/phot4.png)
 
 **5. Getting the Essay Graded**
