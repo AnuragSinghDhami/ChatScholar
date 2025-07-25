@@ -12,23 +12,23 @@ Here is a visual walkthrough of the IntelliStudy application.
 
 **1. Landing Page**
 *The main entry point where users can choose between "Q&A with PDF" and "Essay Grading".*
-![Screenshot of the application's landing page showing two main options: Q&A with PDF and Essay Grading.](https://i.imgur.com/kS5x8f5.png)
+![Screenshot of the application's landing page showing two main options: Q&A with PDF and Essay Grading.](https://github.com/AnuragSinghDhami/ChatScholar/blob/main/static/phot1.png)
 
 **2. Uploading a PDF for Q&A**
 *The user interface for uploading a PDF document to the Q&A system.*
-![Screenshot of the PDF upload interface. A user is selecting a PDF file from their local machine to start a Q&A session.](https://i.imgur.com/9v4J2Lg.png)
+![Screenshot of the PDF upload interface. A user is selecting a PDF file from their local machine to start a Q&A session.](https://github.com/AnuragSinghDhami/ChatScholar/blob/main/static/phot2.png)
 
 **3. Receiving Answers from the PDF**
 *An interactive chat interface where the user asks a question and the AI provides an answer sourced from the document.*
-![Screenshot of the Q&A chat window. The user has asked a question, and the AI has responded with a relevant answer extracted from the uploaded PDF.](https://i.imgur.com/3tGq7Hh.png)
+![Screenshot of the Q&A chat window. The user has asked a question, and the AI has responded with a relevant answer extracted from the uploaded PDF.](https://github.com/AnuragSinghDhami/ChatScholar/blob/main/static/phot3.png)
 
 **4. Defining the Essay Grading Rubric**
 *The setup screen for the Essay Grading tool, where the user defines the criteria and their respective weights (e.g., Grammar: 40%, Vocabulary: 30%, Structure: 30%).*
-![Screenshot showing the interface for setting up the essay grading rubric. There are sliders or input fields for Grammar, Vocabulary, and other criteria.](https://i.imgur.com/rLzO1wP.png)
+![Screenshot showing the interface for setting up the essay grading rubric. There are sliders or input fields for Grammar, Vocabulary, and other criteria.](https://github.com/AnuragSinghDhami/ChatScholar/blob/main/static/phot4.png)
 
 **5. Getting the Essay Graded**
 *The final output screen. The user has submitted an essay, and Gemini has provided a score breakdown and detailed feedback based on the predefined rubric.*
-![Screenshot displaying the results of an essay grade. It shows a final score, a breakdown by criteria, and specific feedback and suggestions for improvement from the Gemini model.](https://i.imgur.com/eYf6X9C.png)
+![Screenshot displaying the results of an essay grade. It shows a final score, a breakdown by criteria, and specific feedback and suggestions for improvement from the Gemini model.](https://github.com/AnuragSinghDhami/ChatScholar/blob/main/static/phot5.png)
 
 
 ## ✨ Features
