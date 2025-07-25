@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-black text-white">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>ChatScholar</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='notes.png') }}">
+</head>
+
+<body class="min-h-full antialiased">
+  <main class="py-8">
+    <div class="mx-auto max-w-3xl px-4">
+      <!-- Back -->
+      <form action="/" class="mb-8">
+        <button
+          type="submit"
+          class="rounded-lg border border-white px-5 py-2 text-sm font-semibold hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black transition"
+        >
+          Back
+        </button>
+      </form>
+
+      <!-- Header -->
+      <header class="mb-8 flex items-center gap-4">
+        <img
+          src="{{ url_for('static', filename='notes.png') }}"
+          alt="ZEP logo"
+          class="h-12 w-12"
+        />
+        <div>
+          <h1 class="text-3xl font-extrabold tracking-tight">Essay Grading Rubric</h1>
+          <p class="text-gray-400 text-sm mt-1">Paste your rubric below and continue.</p>
+        </div>
+      </header>
+
+      <!-- Tag / badge -->
+      <span class="inline-block rounded-full border border-white px-3 py-1 text-xs font-semibold mb-6">
+        Rubric
+      </span>
+
+      <!-- Form -->
+      <section class="border border-gray-700 rounded-lg">
+        <form action="/essay_grading" method="post" enctype="multipart/form-data" class="p-6">
+          <div class="mb-4">
+          <label for="essay_rubric" class="block text-sm font-medium mb-2">
+            Grading Rubric
+          </label>
+          <textarea
+            id="essay_rubric"
+            name="essay_rubric"
+            rows="8"
+            class="w-full rounded-md border border-gray-700 bg-black px-3 py-2 font-mono text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+            placeholder="Define criteria, score bands, weights, etc…"
+            required
+          ></textarea>
+          </div>
+
+          <div class="flex justify-end">
+            <button
+              type="submit"
+              class="rounded-lg border border-white px-6 py-2 font-semibold hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black transition"
+            >
+              Continue
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Auto-resize textarea
+    const ta = document.getElementById('essay_rubric');
+    if (ta) {
+      const autoResize = (el) => {
+        el.style.height = 'auto';
+        el.style.height = el.scrollHeight + 'px';
+      };
+      ta.addEventListener('input', () => autoResize(ta));
+      autoResize(ta);
+
+      // Submit on Ctrl/Cmd + Enter
+      ta.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          e.target.form.submit();
+        }
+      });
+    }
+  </script>
+</body>
+</html>

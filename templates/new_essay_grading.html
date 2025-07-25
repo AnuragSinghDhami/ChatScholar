@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-black text-white">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>ChatScholar</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='notes.png') }}">
+</head>
+
+<body class="min-h-full antialiased">
+  <main class="py-8">
+    <div class="mx-auto max-w-6xl px-4">
+      <!-- Back -->
+      <form action="/" class="mb-8">
+        <button
+          type="submit"
+          class="rounded-lg border border-white px-5 py-2 text-sm font-semibold hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black transition"
+        >
+          Back
+        </button>
+      </form>
+
+      <!-- Header -->
+      <header class="mb-10 flex items-center gap-4">
+        <img
+          src="{{ url_for('static', filename='notes.png') }}"
+          alt="Logo"
+          class="h-12 w-12"
+        />
+        <div>
+          <h1 class="text-3xl font-extrabold tracking-tight">Essay Grading System</h1>
+          <p class="text-gray-400 text-sm mt-1">Upload a PDF or paste your essay text to get graded.</p>
+        </div>
+      </header>
+
+      <div class="flex flex-col lg:flex-row gap-10">
+        <!-- Left: Inputs -->
+        <section class="lg:w-1/2 w-full">
+          <form method="post" enctype="multipart/form-data" class="space-y-6">
+            <!-- File input -->
+            <div>
+              <label for="file" class="block text-sm font-medium mb-2">Upload Essay (PDF)</label>
+              <input
+                id="file"
+                type="file"
+                name="file"
+                accept=".pdf"
+                class="block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-700 file:bg-black file:text-white hover:file:bg-white hover:file:text-black border border-gray-700 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+              />
+            </div>
+
+            <hr class="border-gray-800" />
+
+            <!-- Textarea -->
+            <div>
+              <label for="essay_text" class="block text-sm font-medium mb-2">Enter Text</label>
+              <textarea
+                id="essay_text"
+                name="essay_text"
+                rows="10"
+                class="w-full rounded-md border border-gray-700 bg-black px-3 py-2 font-mono text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+                placeholder="Paste your essay here…"
+              ></textarea>
+            </div>
+
+            <!-- Submit -->
+            <div class="flex justify-end">
+              <button
+                type="submit"
+                class="rounded-lg border border-white px-6 py-2 font-semibold hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black transition"
+              >
+                Process
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Right: Outputs -->
+        <section class="lg:w-1/2 w-full space-y-10">
+          <!-- Input Essay preview -->
+          {% if input_text %}
+          <div>
+            <h2 class="text-xl font-semibold mb-2">Essay</h2>
+            <div class="border border-gray-700 rounded-md h-64 overflow-auto p-4 whitespace-pre-wrap text-gray-200">
+              {{ input_text | safe }}
+            </div>
+          </div>
+          {% endif %}
+
+          <!-- Result -->
+          {% if result %}
+          <div>
+            <h2 class="text-xl font-semibold mb-2">Essay Grading Result</h2>
+            <div class="border border-gray-700 rounded-md h-64 overflow-auto p-4 whitespace-pre-wrap text-gray-200">
+              {{ result | safe }}
+            </div>
+          </div>
+          {% endif %}
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Auto-resize textarea + submit on Ctrl/Cmd+Enter
+    const ta = document.getElementById('essay_text');
+    if (ta) {
+      const autoResize = (el) => {
+        el.style.height = 'auto';
+        el.style.height = el.scrollHeight + 'px';
+      };
+      ta.addEventListener('input', () => autoResize(ta));
+      autoResize(ta);
+
+      ta.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          e.preventDefault();
+          e.target.form.submit();
+        }
+      });
+    }
+  </script>
+</body>
+</html>

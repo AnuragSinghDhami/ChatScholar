@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-black text-white">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>ChatScholar</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='notes.png') }}">
+</head>
+
+<body class="min-h-full antialiased">
+  <main class="py-6">
+    <div class="mx-auto max-w-3xl px-4">
+      <form action="/" class="mb-6">
+        <button
+          type="submit"
+          class="rounded-lg border border-white px-5 py-2 text-sm font-semibold hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black transition"
+        >
+          Back
+        </button>
+      </form>
+
+      <h1 class="text-center text-4xl font-extrabold tracking-tight mb-8 underline decoration-double">
+        Chat Interface
+      </h1>
+
+      <section class="w-full border border-gray-700 rounded-lg overflow-hidden">
+        <header class="w-full py-3 px-4 bg-white text-black font-bold">
+          Ask a question
+        </header>
+
+        {% if chat_history %}
+        <ul
+          id="chat-history"
+          class="space-y-3 p-4 max-h-[60vh] overflow-y-auto"
+          aria-live="polite"
+          aria-relevant="additions"
+        >
+          {% for message in chat_history %}
+          <li
+            class="rounded-md border border-gray-700 bg-gray-900/60 px-4 py-3 text-sm sm:text-base font-mono text-gray-200"
+          >
+            {{ message.content }}
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <div class="w-full flex justify-center p-6">
+          <p class="border border-gray-700 text-gray-300 px-3 py-2 w-full sm:w-1/2 text-center font-mono">
+            No chat history yet.
+          </p>
+        </div>
+        {% endif %}
+
+        <form action="/chat" method="post" class="border-t border-gray-700 p-4">
+          <label for="user_question" class="sr-only">Your question</label>
+          <div class="flex gap-2">
+            <input
+              id="user_question"
+              name="user_question"
+              type="text"
+              required
+              placeholder="Type your question…"
+              class="w-full rounded-lg bg-black text-white placeholder-gray-500 border border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black font-mono"
+              autofocus
+            />
+            <button
+              type="submit"
+              class="shrink-0 rounded-lg border border-white px-6 py-2 font-semibold hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black transition"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Optional: submit on Ctrl/Cmd + Enter
+    const input = document.getElementById('user_question');
+    if (input) {
+      input.addEventListener('keydown', e => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          e.target.form.submit();
+        }
+      });
+    }
+  </script>
+</body>
+</html>

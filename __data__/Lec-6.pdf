@@ -1,0 +1,935 @@
+1Dept. of CSE, IIT KGPPointersPointers
+CS10001:CS10001:   Programming & Data StructuresProgramming & Data Structures
+Prof. Pallab DasguptaProf. Pallab Dasgupta
+Professor, Dept. of Computer Professor, Dept. of Computer 
+Sc. & Engg.,Sc. & Engg.,
+Indian Institute of Indian Institute of 
+Technology, KharagpurTechnology, Kharagpur
+2Dept. of CSE, IIT KGPIntroductionIntroduction
+•A pointer is a variable that represents the location (rather than A pointer is a variable that represents the location (rather than 
+the value) of a data item.the value) of a data item.
+•They have a number of useful applications.They have a number of useful applications.
+–Enables us to access a variable that is defined outside the Enables us to access a variable that is defined outside the 
+function.function.
+–Can be used to pass information back and forth between a Can be used to pass information back and forth between a 
+function and its reference point.function and its reference point.
+–More efficient in handling data tables.More efficient in handling data tables.
+–Reduces the length and complexity of a program.Reduces the length and complexity of a program.
+–Sometimes also increases the execution speed.Sometimes also increases the execution speed.3Dept. of CSE, IIT KGPBasic ConceptBasic Concept
+•In memory, every stored data item occupies one or more In memory, every stored data item occupies one or more 
+contiguous memory cells.contiguous memory cells.
+–The number of memory cells required to store a data item The number of memory cells required to store a data item 
+depends on its type (char, int, double, etc.).depends on its type (char, int, double, etc.).
+•Whenever we declare a variable, the system allocates Whenever we declare a variable, the system allocates 
+memory location(s) to hold the value of the variable.memory location(s) to hold the value of the variable.
+–Since every byte in memory has a unique address, this Since every byte in memory has a unique address, this 
+location will also have its own (unique) address.location will also have its own (unique) address.4Dept. of CSE, IIT KGPContd.Contd.
+•Consider the statementConsider the statement
+                int  xyz = 50;int  xyz = 50;
+–This statement instructs the compiler to allocate a location for This statement instructs the compiler to allocate a location for 
+the integer variable the integer variable xyzxyz, and put the value , and put the value 5050 in that location. in that location.
+–Suppose that the address location chosen is Suppose that the address location chosen is 13801380..
+xyz          variable
+50          value
+1380         address5Dept. of CSE, IIT KGPContd.Contd.
+•During execution of the program, the system always During execution of the program, the system always 
+associates the name associates the name xyzxyz with the address  with the address 13801380..
+–The value The value 5050 can be accessed by using either the name  can be accessed by using either the name 
+xyzxyz or the address  or the address 13801380..
+•Since memory addresses are simply numbers, they can be Since memory addresses are simply numbers, they can be 
+assigned to some variables which can be stored in assigned to some variables which can be stored in 
+memory.memory.
+–Such variables that hold memory addresses are called Such variables that hold memory addresses are called 
+pointerspointers..
+–Since a pointer is a variable, its value is also stored in Since a pointer is a variable, its value is also stored in 
+some memory location.some memory location.6Dept. of CSE, IIT KGPContd.Contd.
+•Suppose we assign the address of Suppose we assign the address of xyzxyz to a variable  to a variable pp..
+–pp is said to point to the variable  is said to point to the variable xyzxyz..
+Variable       Value       Address
+    xyz                50             1380
+      p                1380           2545p = &xyz;7Dept. of CSE, IIT KGPAddress vs. ValueAddress vs. Value
+•Each memory cell has an Each memory cell has an addressaddress associated with it. associated with it.
+•Each cell also stores some Each cell also stores some valuevalue..
+•Don’t confuse the Don’t confuse the addressaddress referring to a memory location with  referring to a memory location with 
+the the valuevalue stored in that location. stored in that location.
+23 42 ...  ...101 102 103 104 105 ...8Dept. of CSE, IIT KGPValues vs LocationsValues vs Locations
+•Variables name memory Variables name memory locationslocations, which hold , which hold valuesvalues..
+32
+x1024:
+addressnamevalue
+New Type : Pointer9Dept. of CSE, IIT KGPPointersPointers
+•A pointer is just a C variable whose A pointer is just a C variable whose valuevalue is the  is the addressaddress of  of 
+another variable!another variable!
+•After declaring a pointer:After declaring a pointer:
+int *ptr;int *ptr;
+ptrptr doesn’t actually point to anything yet.  We can either: doesn’t actually point to anything yet.  We can either:
+–make it point to something that already exists, ormake it point to something that already exists, or
+–allocate room in memory for something new that it will allocate room in memory for something new that it will 
+point to… (next time)point to… (next time)10Dept. of CSE, IIT KGPPointerPointer
+32
+x1024:int x;
+int ∗xp ;
+1024
+xpxp = &x ;
+address of xpointer to int
+∗xp = 0; /* Assign 0 to x */
+∗xp = ∗xp + 1; /* Add 1 to x */Pointers Abstractly
+int x;
+int * p;
+p=&x;
+...
+(x == *p)    True  
+(p == &x)   True11Dept. of CSE, IIT KGPPointersPointers
+•Declaring a pointer just allocates space to hold the pointer – Declaring a pointer just allocates space to hold the pointer – 
+it does not allocate something to be pointed to!it does not allocate something to be pointed to!
+•Local variables in C are not initializedLocal variables in C are not initialized , they may contain , they may contain 
+anything.anything.12Dept. of CSE, IIT KGPPointer Usage ExamplePointer Usage Example
+Memory and Pointers:Memory and Pointers: 0xffff ffff
+0x0000 00000xcafe 0000
+0xbeef 0000
+0x0000 000413Dept. of CSE, IIT KGPPointer Usage ExamplePointer Usage Example
+Memory and Pointers:Memory and Pointers:
+int *p, v;int *p, v;
+0xXXXXXXXX0xffff ffff
+0x0000 00000xcafe 0000
+0xXXXXXXXX 0xbeef 0000
+0x0000 0004p:v:14Dept. of CSE, IIT KGPPointer Usage ExamplePointer Usage Example
+Memory and Pointers:Memory and Pointers:
+int *p, v;int *p, v;
+p = &v;p = &v;
+0xXXXXXXXX0xffff ffff
+0x0000 00000xcafe 0000
+0xcafe 0000 0xbeef 0000
+0x0000 0004p:v:15Dept. of CSE, IIT KGPPointer Usage ExamplePointer Usage Example
+Memory and Pointers:Memory and Pointers:
+int *p, v;int *p, v;
+p = &v;p = &v;
+v = 0x17;v = 0x17;0x0000 00170xffff ffff
+0x0000 00000xcafe 0000
+0xcafe 0000 0xbeef 0000
+0x0000 0004p:v:16Dept. of CSE, IIT KGPPointer Usage ExamplePointer Usage Example
+Memory and Pointers:Memory and Pointers:
+int *p, v;int *p, v;
+p = &v;p = &v;
+v = 0x17;v = 0x17;
+*p = *p + 4;*p = *p + 4;
+V = *p + 4V = *p + 40x0000 001b0xffff ffff
+0x0000 00000xcafe 0000
+0xcafe 0000 0xbeef 0000
+0x0000 0004p:v:17Dept. of CSE, IIT KGPAccessing the Address of a VariableAccessing the Address of a Variable
+•The address of a variable can be determined using the ‘The address of a variable can be determined using the ‘ &&’ ’ 
+operator.operator.
+–The operator ‘The operator ‘ &&’ immediately preceding a variable returns ’ immediately preceding a variable returns 
+the the addressaddress of the variable. of the variable.
+•Example:Example:
+            p = &xyz;p = &xyz;
+–The The addressaddress of xyz (1380) is assigned to p. of xyz (1380) is assigned to p.
+•The ‘&’ operator can be used only with a The ‘&’ operator can be used only with a simple variablesimple variable  or an  or an 
+array elementarray element ..
+              &distance&distance
+      &x[0]&x[0]
+      &x[i-2]&x[i-2]18Dept. of CSE, IIT KGPContd.Contd.
+•Following usages are Following usages are illegalillegal::
+  &235&235
+•Pointing at constant.Pointing at constant.
+        
+    int   arr[20];int   arr[20];
+          ::
+    &arr;&arr;
+•Pointing at array name.Pointing at array name.
+    &(a+b)&(a+b)
+•Pointing at expression.Pointing at expression.19Dept. of CSE, IIT KGPExampleExample
+#include  <stdio.h>
+main()
+{
+    int   a;
+    float  b, c;
+    double  d;
+    char  ch;
+    a = 10;   b = 2.5;  c = 12.36;  d = 12345.66;  ch = ‘A’;
+    printf  (“%d is stored in location %u \n”,  a,  &a) ;
+    printf  (“%f is stored in location %u \n”,  b,  &b) ;
+    printf  (“%f is stored in location %u \n”,  c,  &c) ;
+    printf  (“%ld is stored in location %u \n”, d,  &d) ;
+    printf  (“%c is stored in location %u \n”,  ch, &ch) ;
+}20Dept. of CSE, IIT KGPOutput:
+10 is stored in location 3221224908
+2.500000 is stored in location 3221224904
+12.360000 is stored in location 3221224900
+12345.660000 is stored in location 3221224892
+A is stored in location 3221224891 21Dept. of CSE, IIT KGPPointer DeclarationsPointer Declarations
+•Pointer variables must be declared before we use them.Pointer variables must be declared before we use them.
+•General form:General form:
+                      data_type *pointer_name;data_type *pointer_name;
+•Three things are specified in the above declaration:Three things are specified in the above declaration:
+•The asterisk (*) tells that the variable The asterisk (*) tells that the variable pointer_namepointer_name   
+is a pointer variable.is a pointer variable.
+•pointer_namepointer_name  needs a memory location. needs a memory location.
+•pointer_name points to a variable of type pointer_name points to a variable of type data_typedata_type ..22Dept. of CSE, IIT KGPContd.Contd.
+•Example:Example:
+        int int *count;*count;
+    float *speed;float *speed;
+•Once a pointer variable has been declared, it can be made to point Once a pointer variable has been declared, it can be made to point 
+to a variable using an assignment statement like:to a variable using an assignment statement like:
+            int *p, xyz;int *p, xyz;
+      ::
+      p = &xyz;p = &xyz;
+–This is called This is called pointer initializationpointer initialization ..23Dept. of CSE, IIT KGPThings to RememberThings to Remember
+•Pointer variables  must always point to a data item of the Pointer variables  must always point to a data item of the same same 
+typetype..
+        
+float   x;float   x;
+    int    *p;int    *p;
+        ::                                                        will result in erroneous output  will result in erroneous output
+        p = &x;p = &x;
+•Assigning an absolute address to a pointer variable is Assigning an absolute address to a pointer variable is 
+prohibited.prohibited.
+        
+int   *count;int   *count;
+    ::
+    count = 1268;count = 1268;24Dept. of CSE, IIT KGPAccessing a Variable Through its PointerAccessing a Variable Through its Pointer
+•Once a pointer has been assigned the Once a pointer has been assigned the addressaddress of a variable, the  of a variable, the 
+valuevalue of the variable can be accessed using the  of the variable can be accessed using the indirection indirection 
+operatoroperator (*). (*).
+      
+              
+              int   a, b;int   a, b;
+          int   *p;int   *p;
+          ::
+          p = &a;p = &a;
+        b = *p;b = *p;Equivalent tob = a;25Dept. of CSE, IIT KGPExample 1Example 1
+#include  <stdio.h>
+main()
+{
+    int   a, b;
+    int   c = 5;
+    int   *p;
+    a  =  4  *  (c  +  5) ;
+    p  =  &c;
+    b  =  4  *  (*p  +  5) ; 
+    printf  (“a=%d  b=%d \n”,  a, b); 
+}Equivalent
+a=40 b=4026Dept. of CSE, IIT KGPExample 2Example 2
+#include  <stdio.h>
+main()
+{
+    int  x, y;
+    int  *ptr;
+    
+    x = 10 ;
+    ptr = &x ;
+    y = *ptr ;
+    printf (“%d is stored in location %u \n”,  x,  &x) ;
+    printf (“%d is stored in location %u \n”,  *&x,  &x) ;
+    printf (“%d is stored in location %u \n”,  *ptr,  ptr) ;
+    printf (“%d is stored in location %u \n”,  y,  &*ptr) ;
+    printf (“%u is stored in location %u \n”,  ptr, &ptr) ;
+    printf (“%d is stored in location %u \n”,  y,  &y) ;
+    
+    *ptr = 25;
+    printf (“\nNow x = %d \n”, x);
+}27Dept. of CSE, IIT KGPOutput:
+10 is stored in location 3221224908
+10 is stored in location 3221224908
+10 is stored in location 3221224908
+10 is stored in location 3221224908
+3221224908 is stored in location 3221224900
+10 is stored in location 3221224904
+Now x = 25 Address of x:      3221224908
+Address of y:      3221224904
+Address of ptr:    322122490028Dept. of CSE, IIT KGPPointer ExpressionsPointer Expressions
+•Like other variables, pointer variables can be used in expressions.Like other variables, pointer variables can be used in expressions.
+•If p1 and p2 are two pointers, the following statements are valid:If p1 and p2 are two pointers, the following statements are valid:
+        sum = *p1 + *p2;sum = *p1 + *p2;
+    prod = *p1 * *p2;prod = *p1 * *p2;
+    prod = (*p1) * (*p2);prod = (*p1) * (*p2);
+    *p1 = *p1 + 2;*p1 = *p1 + 2;
+    x = *p1 / *p2 + 5;x = *p1 / *p2 + 5;*p1 can appear on 
+the left hand side29Dept. of CSE, IIT KGPContd.Contd.
+•What are allowed in C?What are allowed in C?
+–Add an integer to a pointer.Add an integer to a pointer.
+–Subtract an integer from a pointer.Subtract an integer from a pointer.
+–Subtract one pointer from another (related).Subtract one pointer from another (related).
+•If If p1p1 and  and p2p2 are both pointers to the same array, then   are both pointers to the same array, then  p2–p2–
+p1p1 gives the number of elements between  gives the number of elements between p1p1 and  and p2p2..30Dept. of CSE, IIT KGPContd.Contd.
+•What are not allowed?What are not allowed?
+–Add two pointers.Add two pointers.
+      p1 = p1 + p2;p1 = p1 + p2;
+–Multiply / divide a pointer in an expression.Multiply / divide a pointer in an expression.
+    p1 = p2 / 5;p1 = p2 / 5;
+  p1 = p1 – p2 * 10;p1 = p1 – p2 * 10;31Dept. of CSE, IIT KGPScale FactorScale Factor
+•We have seen that an integer value can be added to or We have seen that an integer value can be added to or 
+subtracted from a pointer variable.subtracted from a pointer variable.
+int  *p1, *p2;int  *p1, *p2;
+int  i, j;int  i, j;
+::
+p1 = p1 + 1;p1 = p1 + 1;
+p2 = p1 + j;p2 = p1 + j;
+p2++;p2++;
+p2 = p2 p2 = p2 –– (i + j); (i + j);
+–In reality, it is not the integer value which is added/subtracted, In reality, it is not the integer value which is added/subtracted, 
+but rather the but rather the scale factorscale factor   timestimes  the valuethe value..32Dept. of CSE, IIT KGPContd.Contd.
+          Data TypeData Type                 Scale FactorScale Factor
+                    char                     1char                     1
+                    int                        4int                        4
+                    float                     4float                     4
+                    double                 8double                 8
+–If p1 is an integer pointer, thenIf p1 is an integer pointer, then
+                                    p1++p1++
+        will increment the value of will increment the value of p1p1  byby  44..33Dept. of CSE, IIT KGP•Note: Note: 
+–The exact scale factor may vary from one machine to another.The exact scale factor may vary from one machine to another.
+–Can be found out using the Can be found out using the sizeofsizeof function. function.
+–Syntax:Syntax:
+  sizeof (data_type)sizeof (data_type)34Dept. of CSE, IIT KGPExample: to find the scale factorsExample: to find the scale factors
+#include  <stdio.h>
+main()
+{
+  printf (“No. of bytes occupied by int is %d \n”,    sizeof(int));
+  printf (“No. of bytes occupied by float is %d \n”,  sizeof(float));
+  printf (“No. of bytes occupied by double is %d \n”, sizeof(double));
+  printf (“No. of bytes occupied by char is %d \n”,   sizeof(char));
+}
+Output:
+Number of bytes occupied by int is  4
+Number of bytes occupied by float is  4
+Number of bytes occupied by double is  8
+Number of bytes occupied by char is  135Dept. of CSE, IIT KGPPassing Pointers to a FunctionPassing Pointers to a Function
+•Pointers are often passed to a function as arguments.Pointers are often passed to a function as arguments.
+–Allows data items within the calling program to be Allows data items within the calling program to be 
+accessed by the function, altered, and then returned to the accessed by the function, altered, and then returned to the 
+calling program in altered form.calling program in altered form.
+–Called Called call-by-referencecall-by-reference  (or by  (or by addressaddress or by  or by locationlocation).).
+•Normally, arguments are passed to a function Normally, arguments are passed to a function by valueby value..
+–The data items are copied to the function.The data items are copied to the function.
+–Changes are not reflected in the calling program.Changes are not reflected in the calling program.36Dept. of CSE, IIT KGPExample: passing arguments by valueExample: passing arguments by value
+#include  <stdio.h>
+main()
+{
+   int  a, b;
+   a = 5;  b = 20;
+   swap (a, b);
+   printf (“\n a=%d, b=%d”, a, b);
+}
+void  swap (int x, int y)
+{
+   int  t;
+   t = x;
+   x = y;
+   y = t;
+}Output
+a=5, b=2037Dept. of CSE, IIT KGPExample: passing arguments by referenceExample: passing arguments by reference
+#include  <stdio.h>
+main()
+{
+   int  a, b;
+   a = 5;  b = 20;
+   swap (&a, &b);
+   printf (“\n a=%d, b=%d”, a, b);
+}
+void swap (int *x, int *y)
+{
+   int  t;
+   t = *x;
+   *x = *y;
+   *y = t;
+}Output
+a=20, b=538Dept. of CSE, IIT KGPPointers and ArraysPointers and Arrays
+•When an array is declared,When an array is declared,
+–The compiler allocates a The compiler allocates a base addressbase address  and sufficient amount of  and sufficient amount of 
+storage to contain all the elements of the array in contiguous storage to contain all the elements of the array in contiguous 
+memory locations.memory locations.
+–The The base addressbase address  is the location of the first element ( is the location of the first element ( index 0index 0) ) 
+of the array.of the array.
+–The compiler also defines the array name as a The compiler also defines the array name as a constant pointerconstant pointer   
+to the first element.to the first element.39Dept. of CSE, IIT KGPExampleExample
+•Consider the declaration:Consider the declaration:
+              int x[5] = {1, 2, 3, 4, 5};int x[5] = {1, 2, 3, 4, 5};
+–Suppose that the base address of x is 2500, and each Suppose that the base address of x is 2500, and each 
+integer requires 4 bytes.integer requires 4 bytes.
+                
+      ElementElement        ValueValue        AddressAddress
+                          x[0]             1           2500x[0]             1           2500
+                          x[1]             2           2504x[1]             2           2504
+                          x[2]             3           2508x[2]             3           2508
+                          x[3]             4           2512x[3]             4           2512
+                          x[4]             5           2516x[4]             5           251640Dept. of CSE, IIT KGPContd.Contd.
+        Both Both xx and and  &x[0] &x[0] have the valuehave the value  2500. 2500.
+        p = x;p = x;    and        and    p = &x[0];p = &x[0];   are equivalent.  are equivalent.
+–We can access successive values of We can access successive values of xx by using  by using p++p++ or  or p--p-- to  to 
+move from one element to another.move from one element to another.
+•Relationship between p and x:Relationship between p and x:
+p      =   &x[0]   =   2500p      =   &x[0]   =   2500
+p+1  =   &x[1]   =   2504p+1  =   &x[1]   =   2504
+p+2  =   &x[2]   =   2508p+2  =   &x[2]   =   2508
+p+3  =   &x[3]   =   2512p+3  =   &x[3]   =   2512
+p+4  =   &x[4]   =   2516p+4  =   &x[4]   =   2516
+*(p+i) gives the
+     value of x[i]41Dept. of CSE, IIT KGPExample: function to find averageExample: function to find average
+#include <stdio.h>
+main()
+{
+  int x[100], k, n;
+  scanf (“%d”, &n);
+  for (k=0; k<n; k++)
+     scanf (“%d”, &x[k]);
+  printf  (“\nAverage is %f”,
+                avg (x, n));
+} 
+                              
+    float avg (array, size)
+int array[], size;
+{
+  int  *p, i , sum = 0;
+  p = array;
+  for (i=0; i<size; i++)
+      sum = sum + *(p+i);
+   
+  return ((float) sum / size);
+}42Dept. of CSE, IIT KGPArrays and pointersArrays and pointers
+•An array name is an address, or a pointer value.An array name is an address, or a pointer value.
+•Pointers as well as arrays can be subscripted.Pointers as well as arrays can be subscripted.
+•A pointer variable can take different addresses as values.A pointer variable can take different addresses as values.
+•An array name is an address, or pointer, that is fixed.An array name is an address, or pointer, that is fixed.
+It is a It is a CONSTANTCONSTANT  pointer to the first element. pointer to the first element.43Dept. of CSE, IIT KGPArraysArrays
+•Consequences:Consequences:
+–arar is a pointer is a pointer
+–ar[0]ar[0] is the same as  is the same as *ar*ar
+–ar[2]ar[2] is the same as  is the same as *(ar+2)*(ar+2)
+–We can use pointer arithmetic to access arrays more We can use pointer arithmetic to access arrays more 
+conveniently.conveniently.
+•Declared arrays are only allocated while the scope is validDeclared arrays are only allocated while the scope is valid
+char *foo() {char *foo() {
+   char string[32]; ...;   char string[32]; ...;
+   return string;   return string;
+}}  is incorrectis incorrect44Dept. of CSE, IIT KGPArraysArrays
+•Array size Array size nn; want to access from ; want to access from 00 to  to n-1n-1, so you should , so you should 
+use counter AND utilize a constant for declaration & incruse counter AND utilize a constant for declaration & incr
+–WrongWrong
+int i, ar[10];int i, ar[10];
+for(i = 0; i < 10; i++){ ... }for(i = 0; i < 10; i++){ ... }
+–RightRight  
+#define ARRAY_SIZE 10#define ARRAY_SIZE 10
+int i, a[ARRAY_SIZE];int i, a[ARRAY_SIZE];
+for(i = 0; i < ARRAY_SIZE; i++){ ... }for(i = 0; i < ARRAY_SIZE; i++){ ... }
+•Why? Why? SINGLE SOURCE OF TRUTHSINGLE SOURCE OF TRUTH
+–You’re utilizing You’re utilizing indirectionindirection  and  and avoiding maintaining two avoiding maintaining two 
+copiescopies of the number 10 of the number 1045Dept. of CSE, IIT KGPArraysArrays
+•Pitfall: An array in C does Pitfall: An array in C does notnot know its own length, & bounds  know its own length, & bounds 
+not checked!not checked!
+–Consequence: We can accidentally access off the end of Consequence: We can accidentally access off the end of 
+an array.an array.
+–Consequence: We must pass the array Consequence: We must pass the array and its sizeand its size  to a  to a 
+procedure which is going to traverse it.procedure which is going to traverse it.
+•Segmentation faultsSegmentation faults  and  and bus errorsbus errors ::
+–These are VERY difficult to find; These are VERY difficult to find; 
+be careful!be careful!
+–You’ll learn how to debug these in lab…You’ll learn how to debug these in lab…46Dept. of CSE, IIT KGPArrays  In FunctionsArrays  In Functions
+•An array parameter can be declared as an array An array parameter can be declared as an array oror a pointer; an  a pointer; an 
+array argument can be passed as a pointer.array argument can be passed as a pointer.
+–Can be incrementedCan be incremented
+int strlen(char s[])
+{
+    
+}int strlen(char *s)
+{
+}47Dept. of CSE, IIT KGPArrays and pointersArrays and pointers
+int a[20], i, *p;int a[20], i, *p;
+•The expression The expression a[i]a[i] is equivalent to  is equivalent to *(a+i)*(a+i)
+•p[i] p[i] is equivalent tois equivalent to  *(p+i) *(p+i)
+•When an array is declared the compiler allocates a sufficient When an array is declared the compiler allocates a sufficient 
+amount of contiguous space in memory. The base address of amount of contiguous space in memory. The base address of 
+the array is the address of a[0].the array is the address of a[0].
+•Suppose the system assigns 300 as the base address of a. Suppose the system assigns 300 as the base address of a. 
+a[0], a[1], ...,a[19]a[0], a[1], ...,a[19]  are allocated  are allocated 300, 304, ..., 376300, 304, ..., 376 ..48Dept. of CSE, IIT KGPArrays and pointersArrays and pointers
+#define N 20#define N 20
+int a[2N], i, *p, sum;int a[2N], i, *p, sum;
+•p = a; p = a; is equivalent tois equivalent to  p = *a[0]; p = *a[0];
+•p p is assignedis assigned  300. 300.
+•Pointer arithmetic provides an alternative to array indexing.Pointer arithmetic provides an alternative to array indexing.
+•p=a+1;p=a+1; is equivalent to  is equivalent to p=&a[1];p=&a[1]; (p is assigned 304) (p is assigned 304)
+for (p=a; p<&a[N]; ++p)
+sum += *p ;p=a;
+for (i=0; i<N; ++i)
+sum += p[i] ;
+for (i=0; i<N; ++i)
+sum += *(a+i) ;49Dept. of CSE, IIT KGPArrays and pointersArrays and pointers
+int a[N];int a[N];
+•a is a a is a constant pointerconstant pointer ..
+•a=p; ++a; a+=2;  a=p; ++a; a+=2;  illegalillegal50Dept. of CSE, IIT KGPPointer arithmetic and element sizePointer arithmetic and element size
+double * p, *q ;double * p, *q ;
+•The expression The expression p+1p+1 yields the correct machine address for the  yields the correct machine address for the 
+next variable of that type.next variable of that type.
+•Other valid pointer expressions:Other valid pointer expressions:
+–p+ip+i
+–++p++p
+–p+=ip+=i
+–p-q p-q /* No of array elements between p and q *//* No of array elements between p and q */51Dept. of CSE, IIT KGPPointer Arithmetic Pointer Arithmetic 
+•Since a pointer is just a mem address, we can add to it to traverse Since a pointer is just a mem address, we can add to it to traverse 
+an array.an array.
+•p+1p+1 returns a ptr to the next array element. returns a ptr to the next array element.
+•(*p)+1(*p)+1 vs  vs *p++*p++ vs  vs *(p+1)*(p+1) vs  vs *(p)++*(p)++ ? ?
+–  x = *p++x = *p++   ⇒⇒  x = *px = *p ;  ; p =  p + 1;p =  p + 1;
+–  x = (*p)++x = (*p)++   ⇒⇒  x = *px = *p ;  ; *p = *p + 1;*p = *p + 1;
+•What if we have an array of large structs (objects)?What if we have an array of large structs (objects)?
+–C takes care of it: In reality, C takes care of it: In reality, p+1p+1 doesn’t add  doesn’t add 11 to the memory  to the memory 
+address, it adds the address, it adds the size of the array elementsize of the array element ..52Dept. of CSE, IIT KGP  Pointer Arithmetic Pointer Arithmetic 
+•We can use pointer arithmetic to “walk” through memory:We can use pointer arithmetic to “walk” through memory:
+°C automatically adjusts the pointer by the right amount each 
+time (i.e., 1 byte for a char, 4 bytes for an int, etc.)void copy(int *from, int *to, int n) {
+    int i;
+    for (i=0; i<n; i++) {
+        *to++ = *from++;
+    }
+}53Dept. of CSE, IIT KGPint get(int array[], int n)
+{
+    return  (array[n]);
+/* OR */
+    return *(array + n);
+}Pointer Arithmetic Pointer Arithmetic 
+•C knows the size of the thing a pointer points to – every addition or C knows the size of the thing a pointer points to – every addition or 
+subtraction moves that many bytes.subtraction moves that many bytes.
+•So the following are equivalent:So the following are equivalent:54Dept. of CSE, IIT KGPPointer Arithmetic Pointer Arithmetic 
+•Array size Array size nn; want to access from ; want to access from 00 to  to n-1n-1  
+–test for exit by comparing to address one element past the test for exit by comparing to address one element past the 
+arrayarray
+  int ar[10], *p, *q, sum = 0;int ar[10], *p, *q, sum = 0;
+......
+p = ar; q = &(ar[10]);p = ar; q = &(ar[10]);
+while (p != q)while (p != q)
+  /* sum = sum + *p; p = p + 1; *//* sum = sum + *p; p = p + 1; */
+sum += *p++;sum += *p++;
+–Is this legal?Is this legal?
+•C defines that one element past end of array C defines that one element past end of array must be a valid must be a valid 
+addressaddress, i.e., not cause an bus error or address error, i.e., not cause an bus error or address error55Dept. of CSE, IIT KGPExample with 2-D arrayExample with 2-D array
+TO BE DISCUSSED LATER56Dept. of CSE, IIT KGPStructures RevisitedStructures Revisited
+•Recall that a structure can be declared as:Recall that a structure can be declared as:
+struct stud {struct stud {
+                              int    roll;int    roll;
+                              char  dept_code[25];char  dept_code[25];
+                              float  cgpa;float  cgpa;
+                        };};
+struct  stud  a, b, c;struct  stud  a, b, c;
+•And the individual structure elements can be accessed And the individual structure elements can be accessed 
+as:as:
+a.roll ,  b.roll ,  c.cgpa a.roll ,  b.roll ,  c.cgpa 57Dept. of CSE, IIT KGPArrays of StructuresArrays of Structures
+•We can define an array of structure records asWe can define an array of structure records as
+struct stud class[100];struct stud class[100];
+•The structure elements of the individual records can be The structure elements of the individual records can be 
+accessed as:accessed as:
+class[i].rollclass[i].roll
+  class[20].dept_codeclass[20].dept_code
+class[k++].cgpaclass[k++].cgpa58Dept. of CSE, IIT KGPExample :: sort by roll number (bubble sort)Example :: sort by roll number (bubble sort)
+#include <stdio.h>
+struct stud   
+{
+    int  roll;
+    char  dept_code[25];
+    float  cgpa;
+};
+main()
+{
+  struc  stud  class[100], t;
+  int  j, k, n;
+      
+  scanf  (“%d”, &n); 
+        /* no. of students */for (k=0; k<n; k++)
+  scanf (“%d %s %f”, &class[k].roll,
+               class[k].dept_code, 
+               &class[k].cgpa);
+for (j=0; j<n-1; j++)
+  for (k=j+1; k<n; k++)
+  {
+    if (class[j].roll > class[k].roll)
+    {
+       t = class[j];
+       class[j] = class[k];
+       class[k] = t;
+     }
+   }
+    <<<< PRINT THE RECORDS >>>>
+}59Dept. of CSE, IIT KGPExample :: selection sortExample :: selection sort
+int min_loc (struct stud x[],
+                int k, int size) 
+ 
+int j, pos; 
+{
+   pos = k; 
+   for (j=k+1; j<size; j++)
+      if (x[j] < x[pos])
+  pos = j;
+   return pos;
+}int selsort (struct stud x[],int n)
+{
+   int k, m;
+   for (k=0; k<n-1; k++)
+   {
+      m = min_loc(x, k, n);
+      temp = a[k];
+      a[k] = a[m];
+      a[m] = temp;
+   }
+}main()
+{
+  struc  stud  class[100];
+  int n;
+  …
+  selsort (class, n);
+  …60Dept. of CSE, IIT KGPArrays within StructuresArrays within Structures
+•C allows the use of arrays as structure members.C allows the use of arrays as structure members.
+•Example:Example:
+struct stud {struct stud {
+                              int   roll;int   roll;
+                              char  dept_code[25];                char  dept_code[25];                
+                            
+                              int   marks[6];int   marks[6];
+                              float cgpa;float cgpa;
+                        };};
+struct  stud  class[100];struct  stud  class[100];
+•To access individual marks of students:To access individual marks of students:
+class[35].marks[4]class[35].marks[4]
+class[i].marks[j]class[i].marks[j]61Dept. of CSE, IIT KGPPointers and StructuresPointers and Structures
+•You may recall that the name of an array stands for the You may recall that the name of an array stands for the 
+address of its address of its zero-th elementzero-th element ..
+–Also true for the names of arrays of structure variables.Also true for the names of arrays of structure variables.
+•Consider the declaration:Consider the declaration:
+struct stud {struct stud {
+                              int   roll;int   roll;
+                              char  dept_code[25];char  dept_code[25];
+                              float cgpa;float cgpa;
+                        }  }  class[100],  *ptrclass[100],  *ptr  ; ;62Dept. of CSE, IIT KGP–The name The name classclass represents the address of the zero-th  represents the address of the zero-th 
+element of the structure array.element of the structure array.
+–ptrptr is a pointer to data objects of the type  is a pointer to data objects of the type struct studstruct stud ..
+•The assignmentThe assignment
+ptr = class;ptr = class;
+        will assign the address of will assign the address of class[0]class[0]  to  to ptrptr..
+•When the pointer When the pointer ptr ptr is incremented by one (ptr+is incremented by one (ptr+
++) :+) :
+–The value of The value of ptrptr is actually increased by  is actually increased by sizeof(studsizeof(stud ).).
+–It is made to point to the next record.It is made to point to the next record.63Dept. of CSE, IIT KGP•Once Once ptrptr points to a structure variable, the members  points to a structure variable, the members 
+can be accessed as:can be accessed as:
+        ptr ptr –> roll;–> roll;
+    ptr ptr –> dept_code;–> dept_code;
+    ptr ptr –> cgpa;–> cgpa;
+–The symbol “The symbol “ –>–>” is called the ” is called the arrowarrow operator. operator.64Dept. of CSE, IIT KGPA WarningA Warning
+•When using structure pointers, we should take care When using structure pointers, we should take care 
+of operator precedence.of operator precedence.
+–Member operator “.” has higher precedence than “*”.Member operator “.” has higher precedence than “*”.
+    ptr ptr –> roll–> roll    and        and    (*ptr).roll(*ptr).roll    mean the same thing.    mean the same thing.
+    *ptr.roll*ptr.roll   will lead to error.   will lead to error.
+–The operator  “The operator  “ –>–>”  enjoys the highest priority among ”  enjoys the highest priority among 
+operators.operators.
+    ++ptr –> roll++ptr –> roll     will increment roll, not     will increment roll, not ptrptr..
+    (++ptr) –> roll(++ptr) –> roll     will do the intended thing.    will do the intended thing.65Dept. of CSE, IIT KGPStructures and FunctionsStructures and Functions
+•A structure can be passed as argument to a function.A structure can be passed as argument to a function.
+•A function can also return a structure.A function can also return a structure.
+•The process shall be illustrated with the help of an The process shall be illustrated with the help of an 
+example.example.
+–A function to add two complex numbers.A function to add two complex numbers.66Dept. of CSE, IIT KGPExample: complex number additionExample: complex number addition
+#include <stdio.h>
+struct complex {
+                  float  re;
+                  float  im;
+                };
+main()
+{
+   struct  complex  a, b, c;
+   scanf  (“%f %f”, &a.re, &a.im);
+   scanf  (“%f %f”, &b.re, &b.im);
+   c  =  add (a, b) ;
+   printf  (“\n %f %f”, c,re, c.im);
+}struct complex add (x, y)
+struct complex x, y;
+{
+   struct complex  t;
+   t.re = x.re + y.re ;
+   t.im = x.im + y.im ;
+   return (t) ;
+}67Dept. of CSE, IIT KGPExample: Alternative way using pointersExample: Alternative way using pointers
+#include <stdio.h>
+struct complex  {
+                   float  re;
+                   float  im;
+                };
+main()
+{
+   struct  complex  a, b, c;
+   scanf  (“%f %f”, &a.re, &a.im);
+   scanf  (“%f %f”, &b.re, &b.im);
+   add (&a, &b, &c) ;
+   printf (“\n %f %f”, c,re, c.im);
+}void add (x, y, t)
+struct complex  *x, *y, *t;
+{
+   t->re = x->re + y->re;
+   t->im = x->im + y->im;
+}68Dept. of CSE, IIT KGPDynamic Memory AllocationDynamic Memory Allocation69Dept. of CSE, IIT KGPBasic IdeaBasic Idea
+•Many a time we face situations where data is dynamic Many a time we face situations where data is dynamic 
+in nature.in nature.
+–Amount of data cannot be predicted beforehand.Amount of data cannot be predicted beforehand.
+–Number of data items keeps changing during program Number of data items keeps changing during program 
+execution.execution.
+•Such situations can be handled more easily and Such situations can be handled more easily and 
+effectively using dynamic memory management effectively using dynamic memory management 
+techniques.techniques.70Dept. of CSE, IIT KGPContd.Contd.
+•C language requires the number of elements in an array C language requires the number of elements in an array 
+to be specified at compile time.to be specified at compile time.
+–Often leads to wastage or memory space or program failure.Often leads to wastage or memory space or program failure.
+•Dynamic Memory AllocationDynamic Memory Allocation
+–Memory space required can be specified at the time of Memory space required can be specified at the time of 
+execution.execution.
+–C supports allocating and freeing memory dynamically using C supports allocating and freeing memory dynamically using 
+library routines.library routines.71Dept. of CSE, IIT KGPMemory Allocation Process  in CMemory Allocation Process  in C
+Local variables
+Free memory
+Global variables
+InstructionsPermanent 
+storage areaStack
+Heap72Dept. of CSE, IIT KGPContd.Contd.
+•The program instructions and the global variables are The program instructions and the global variables are 
+stored in a region known as stored in a region known as permanent storage areapermanent storage area ..
+•The local variables are stored in another area called The local variables are stored in another area called 
+stackstack..
+•The memory space between these two areas is The memory space between these two areas is 
+available for dynamic allocation during execution of the available for dynamic allocation during execution of the 
+program.program.
+–This free region is called the This free region is called the heapheap..
+–The size of the heap keeps changing.The size of the heap keeps changing.73Dept. of CSE, IIT KGPMemory Allocation FunctionsMemory Allocation Functions
+•mallocmalloc
+–Allocates requested number of bytes and returns a pointer Allocates requested number of bytes and returns a pointer 
+to the first byte of the allocated space.to the first byte of the allocated space.
+•calloccalloc
+–Allocates space for an array of elements, initializes them to Allocates space for an array of elements, initializes them to 
+zero and then returns a pointer to the memory.zero and then returns a pointer to the memory.
+•freefree
+Frees previously allocated space.Frees previously allocated space.
+•reallocrealloc
+–Modifies the size of previously allocated space.Modifies the size of previously allocated space.74Dept. of CSE, IIT KGPAllocating a Block of MemoryAllocating a Block of Memory
+•A block of memory can be allocated using the function A block of memory can be allocated using the function 
+mallocmalloc..
+–Reserves a block of memory of specified size and returns a Reserves a block of memory of specified size and returns a 
+pointer of type pointer of type voidvoid..
+–The return pointer can be type-casted to any pointer type.The return pointer can be type-casted to any pointer type.
+•General format:General format:
+        ptr =  (type *) malloc (byte_size);ptr =  (type *) malloc (byte_size);75Dept. of CSE, IIT KGPContd.Contd.
+•ExamplesExamples
+        p = (int *) malloc(100 * sizeof(int));p = (int *) malloc(100 * sizeof(int));
+–A memory space equivalent to A memory space equivalent to 100 times the size of an int100 times the size of an int   
+bytes is reserved.bytes is reserved.
+–The address of the first byte of the allocated memory is The address of the first byte of the allocated memory is 
+assigned to the pointer assigned to the pointer pp of type  of type intint..
+p
+400 bytes of space76Dept. of CSE, IIT KGPContd.Contd.
+        cptr = (char *) malloc (20);cptr = (char *) malloc (20);
+–Allocates 20 bytes of space for the pointer Allocates 20 bytes of space for the pointer cptrcptr of type  of type charchar..
+        sptr = (struct stud *) malloc sptr = (struct stud *) malloc 
+                (10 * sizeof (struct stud));(10 * sizeof (struct stud));
+–Allocates space for a structure array of 10 elements. Allocates space for a structure array of 10 elements. sptrsptr  
+points to a structure element of type “points to a structure element of type “ struct studstruct stud ”.”.77Dept. of CSE, IIT KGPPoints to NotePoints to Note
+•mallocmalloc always allocates a block of contiguous  always allocates a block of contiguous 
+bytes.bytes.
+–The allocation can fail if sufficient contiguous memory The allocation can fail if sufficient contiguous memory 
+space is not available.space is not available.
+–If it fails, If it fails, mallocmalloc returns  returns NULLNULL..
+if  ((p = (int *) malloc(100 * sizeof(int))) == NULL)if  ((p = (int *) malloc(100 * sizeof(int))) == NULL)
+    {{
+    printf (“\n Memory cannot be allocated”);printf (“\n Memory cannot be allocated”);
+    exit();exit();
+}}78Dept. of CSE, IIT KGPExampleExample
+printf("Input heights for %d 
+students \n",N);
+  for (i=0; i<N; i++)
+   scanf ("%f", &height[i]);
+  for(i=0;i<N;i++)
+    sum += height[i];
+  avg = sum / (float) N;
+  printf("Average height = %f \n",
+               avg);
+  free (height);
+}#include <stdio.h>
+main()
+{
+  int i,N;
+  float *height;
+  float sum=0,avg;
+  printf("Input no. of students\n");
+  scanf("%d", &N);
+  height = (float *) 
+       malloc(N * sizeof(float));79Dept. of CSE, IIT KGPReleasing the Used SpaceReleasing the Used Space
+•When we no longer need the data stored in a block of When we no longer need the data stored in a block of 
+memory, we may release the block for future use.memory, we may release the block for future use.
+•How?How?
+–By using the By using the freefree function. function.
+•General syntax:General syntax:
+                free (ptr);free (ptr);
+        where where ptrptr is a pointer to a memory block which has  is a pointer to a memory block which has 
+been previously created using been previously created using mallocmalloc..80Dept. of CSE, IIT KGPAltering the Size of a BlockAltering the Size of a Block
+•Sometimes we need to alter the size of some Sometimes we need to alter the size of some 
+previously allocated memory block.previously allocated memory block.
+–More memory needed.More memory needed.
+–Memory allocated is larger than necessary.Memory allocated is larger than necessary.
+•How?How?
+–By using the By using the reallocrealloc function. function.
+•If the original allocation is done as:If the original allocation is done as:
+                ptr = malloc (size);ptr = malloc (size);
+        then reallocation of space may be done as:then reallocation of space may be done as:
+                ptr = realloc (ptr, newsize);ptr = realloc (ptr, newsize);81Dept. of CSE, IIT KGPContd.Contd.
+–The new memory block may or may not begin at the same The new memory block may or may not begin at the same 
+place as the old one.place as the old one.
+•If it does not find space, it will create it in an entirely If it does not find space, it will create it in an entirely 
+different region and move the contents of the old block different region and move the contents of the old block 
+into the new block.into the new block.
+–The function guarantees that the old data remains intact.The function guarantees that the old data remains intact.
+–If it is unable to allocate, it returns If it is unable to allocate, it returns NULLNULL and frees the  and frees the 
+original block.original block.82Dept. of CSE, IIT KGPPointer to PointerPointer to Pointer
+•Example:Example:
+                      int **p;int **p;
+            p = (int **) malloc(3 * sizeof(int *));p = (int **) malloc(3 * sizeof(int *));   
+p
+p[2]p[1]p[0]
+int *int 
+**
+int *int *83Dept. of CSE, IIT KGP2-D Array Allocation2-D Array Allocation
+#include <stdio.h>
+#include <stdlib.h>
+int **allocate (int h, int w)
+    {
+      int **p;
+      int i, j;  
+   
+      p = (int **) calloc(h, sizeof (int *) );
+      for (i=0;i<h;i++)
+        p[i] = (int *) calloc(w,sizeof (int));
+      return(p);
+    }Allocate array
+of pointers
+Allocate array of
+integers for each
+rowvoid read_data (int **p, int h, int w)
+  {
+      int i, j;
+      for (i=0;i<h;i++)
+        for (j=0;j<w;j++)
+          scanf ("%d", &p[i][j]);
+  }
+Elements accessed
+like 2-D array elements. 84Dept. of CSE, IIT KGPvoid print_data (int **p, int h, int w)
+  {
+     int i, j;
+      for (i=0;i<h;i++)
+      {
+      for (j=0;j<w;j++)
+        printf ("%5d ", p[i][j]);
+       printf ("\n");
+      }
+}2-D Array: Contd.2-D Array: Contd.
+main()
+{
+  int **p;
+  int M, N;
+  printf ("Give M and N \n");
+  scanf ("%d%d", &M, &N);
+  p = allocate (M, N);
+  read_data (p, M, N);
+  printf ("\nThe array read as \n");
+  print_data (p, M, N);
+}Give M and N 
+3 3
+1 2 3
+4 5 6
+7 8 9
+ The array read as 
+    1     2     3 
+    4     5     6 
+    7     8     9 85Dept. of CSE, IIT KGPLinked List :: Basic ConceptsLinked List :: Basic Concepts
+•A list refers to a set of items organized sequentially.A list refers to a set of items organized sequentially.
+–An array is an example of a list.An array is an example of a list.
+•The array index is used for accessing and manipulation of array The array index is used for accessing and manipulation of array 
+elements.elements.
+–Problems with array:Problems with array:
+•The array size has to be specified at the beginning.The array size has to be specified at the beginning.
+•Deleting an element or inserting an element may require shifting of Deleting an element or inserting an element may require shifting of 
+elements.elements.86Dept. of CSE, IIT KGPContd.Contd.
+•A completely different way to represent a list:A completely different way to represent a list:
+–Make each item in the list part of a structure.Make each item in the list part of a structure.
+–The structure also contains a pointer or link to the structure The structure also contains a pointer or link to the structure 
+containing the next item.containing the next item.
+–This type of list is called a linked list.This type of list is called a linked list.
+Structure 1 Structure 2 Structure 3
+item item item87Dept. of CSE, IIT KGPContd.Contd.
+•Each structure of the list is called a Each structure of the list is called a nodenode, and , and 
+consists of two fields:consists of two fields:
+–One containing the item.One containing the item.
+–The other containing the address of the next item in the The other containing the address of the next item in the 
+list.list.
+•The data items comprising a linked list need not The data items comprising a linked list need not 
+be contiguous in memory.be contiguous in memory.
+–They are ordered by logical links that are stored as part They are ordered by logical links that are stored as part 
+of the data in the structure itself.of the data in the structure itself.
+–The link is a pointer to another structure of the same The link is a pointer to another structure of the same 
+type.type.88Dept. of CSE, IIT KGPContd.Contd.
+•Such a structure can be represented as:Such a structure can be represented as:
+        struct struct nodenode
+            {{
+                  int item;int item;
+                  struct struct nodenode  *next;  *next;
+            } } 
+•Such structures which contain a member field Such structures which contain a member field 
+pointing to the same structure type are called pointing to the same structure type are called 
+self-referential structuresself-referential structures ..itemnode
+next89Dept. of CSE, IIT KGPContd.Contd.
+•In general, a node may be represented as follows:In general, a node may be represented as follows:
+        struct struct node_namenode_name
+            {{
+                  type  member1;type  member1;
+                  type member2;type member2;
+          ………          ………
+                  struct struct node_namenode_name  *next; *next;
+            }}90Dept. of CSE, IIT KGPIllustrationIllustration
+•Consider the structure:Consider the structure:
+        struct studstruct stud
+            {{
+                  int  roll;int  roll;
+                  char name[30];char name[30];
+                  int  age;int  age;
+                  struct stud *next;struct stud *next;
+            }}
+•Also assume that the list consists of three nodes n1, n2 Also assume that the list consists of three nodes n1, n2 
+and n3.and n3.
+            struct stud n1, n2, n3;struct stud n1, n2, n3;91Dept. of CSE, IIT KGPContd.Contd.
+•To create the links between nodes, we can write:To create the links between nodes, we can write:
+      n1.next =  &n2 ;n1.next =  &n2 ;
+  n2.next =  &n3 ;n2.next =  &n3 ;
+  n3.next =  NULL ;n3.next =  NULL ;       /* No more nodes follow *//* No more nodes follow */
+•Now the list looks like:Now the list looks like:
+n1n2n3roll
+name
+age
+next92Dept. of CSE, IIT KGPExampleExample
+#include  <stdio.h>
+struct  stud
+  {
+      int  roll;
+      char  name[30];
+      int  age;
+      struct  stud  *next;
+  }
+main()
+{
+    struct  stud  n1, n2, n3;
+    struct  stud  *p;
+    scanf (“%d %s %d”, &n1.roll, n1.name, &n1.age);
+    scanf (“%d %s %d”, &n2.roll, n2.name, &n2.age);
+    scanf (“%d %s %d”, &n3.roll, n3.name, &n3.age);93Dept. of CSE, IIT KGP         n1.next  =  &n2 ;
+    n2.next  =  &n3 ;
+    n3.next  =  NULL ;
+   /* Now traverse the list and print the elements */
+    p  =  n1 ;   /* point to 1st element */
+    while  (p != NULL)
+    {
+        printf (“\n %d %s %d”,
+        p->roll, p->name, p->age);
+        p  =  p->next;
+    }
+}94Dept. of CSE, IIT KGPAlternative WayAlternative Way
+•Dynamically allocate space for the nodes.Dynamically allocate space for the nodes.
+–Use malloc or calloc individually for every node allocated.Use malloc or calloc individually for every node allocated.
